@@ -1,3 +1,4 @@
+// TODO Remove this file
 import React from 'react'
 import * as BooksAPI from './BooksAPI'
 import './App.css'
@@ -11,43 +12,18 @@ class BooksApp extends React.Component {
      * pages, as well as provide a good URL they can bookmark and share.
      */
     books: [],
-    showSearchPage: false,
-    showAddBookPage: false
+    showSearchPage: false
   }
 
-  // grab list of books and set as App state
   componentDidMount() {
     BooksAPI.getAll()
       .then((books) => {
         this.setState({ books })
         console.log(this.state)
-    })
-  }
-
-  // a toggle function to change the state to open Search page
-  toggleShowSearchPage = () => {
-    this.setState({
-      showSearchPage: !this.state.showSearchPage
-    })
-    console.log(this.state.showSearchPage)
-  }
-
-  // a toggle function to change state to open Add Book page
-  toggleShowAddBookPage  = () => {
-    this.setState({
-      showAddBookPage: !this.state.showAddBookPage
-    })
-    console.log(this.state.showAddBookPage)
+      })
   }
 
   render() {
-    // TODO implement React Router to open AddBook component
-    if (this.state.showAddBookPage) {
-      return (
-        <div>Hello Add Book Page</div>
-      )
-    }
-
     return (
       <div className="app">
         {this.state.showSearchPage ? (
@@ -227,11 +203,8 @@ class BooksApp extends React.Component {
                 </div>
               </div>
             </div>
-            <div className="add-book">
-              <a onClick={this.toggleShowAddBookPage}>Add a book</a>
-            </div>
             <div className="open-search">
-              <a onClick={this.toggleShowSearchPage}>Search books</a>
+              <a onClick={() => this.setState({ showSearchPage: true })}>Add a book</a>
             </div>
           </div>
         )}
