@@ -106,16 +106,16 @@ class BooksApp extends Component {
           <div className="list-books-content">
             <div>
               <BookShelf books={this.state.books}
-                         bookstatus='currentlyReading'
-                         pagetitle='Currently Reading' />
+                         book_status='currentlyReading'
+                         page_title='Currently Reading' />
 
               <BookShelf books={this.state.books}
-                         bookstatus='wantToRead'
-                         pagetitle='Want to Read' />
+                         book_status='wantToRead'
+                         page_title='Want to Read' />
 
               <BookShelf books={this.state.books}
-                         bookstatus='read'
-                         pagetitle='Read' />
+                         book_status='read'
+                         page_title='Read' />
             </div>
           </div>
 

@@ -4,20 +4,20 @@ import PropTypes from 'prop-types'
 class BookShelf extends Component {
   static propTypes = {
     books: PropTypes.array.isRequired,
-    bookstatus: PropTypes.string.isRequired,
-    pagetitle: PropTypes.string.isRequired
+    book_status: PropTypes.string.isRequired,
+    page_title: PropTypes.string.isRequired
   }
 
   render() {
-    const { books, bookstatus, pagetitle } = this.props
+    const { books, book_status, page_title } = this.props
     // {console.log('bookshelf', books)}
 
     return (
       <div className="bookshelf">
-        <h2 className="bookshelf-title">{pagetitle}</h2>
+        <h2 className="bookshelf-title">{page_title}</h2>
         <div className="bookshelf-books">
           <ol className='books-grid'>
-            {books.filter(book => book.shelf === bookstatus)
+            {books.filter(book => book.shelf === book_status)
               .map(book =>
                 <li key={book.title}>
                   <div className="book">
@@ -27,6 +27,7 @@ class BookShelf extends Component {
                            src={book.imageLinks.thumbnail}
                            alt={'{book.title}'} />
                       <div className="book-shelf-changer">
+                        {/*TODO update setState book.shelf*/}
                         <select>
                           <option value="none" disabled>Move to...</option>
                           <option value="currentlyReading">Currently Reading</option>
