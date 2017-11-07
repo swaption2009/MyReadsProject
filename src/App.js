@@ -4,19 +4,11 @@ import './App.css'
 import BookShelf from './BookShelf'
 import SearchPage from './SearchPage'
 import AddBook from './AddBook'
-import { Route } from 'react-router-dom'
+import { Route, Link } from 'react-router-dom'
 
 class BooksApp extends Component {
   state = {
-    /**
-     * TODO: Instead of using this state variable to keep track of which page
-     * we're on, use the URL in the browser's address bar. This will ensure that
-     * users can use the browser's back and forward buttons to navigate between
-     * pages, as well as provide a good URL they can bookmark and share.
-     */
     books: [],
-    showSearchPage: false,
-    showAddBookPage: false
   }
 
   // grab list of books and set as App state
@@ -26,22 +18,6 @@ class BooksApp extends Component {
         this.setState({ books })
         // console.log(this.state.books)
     })
-  }
-
-  // a toggle function to change the state to open Search page
-  toggleShowSearchPage = () => {
-    this.setState({
-      showSearchPage: !this.state.showSearchPage
-    })
-    // console.log(this.state.showSearchPage)
-  }
-
-  // a toggle function to change state to open Add Book page
-  toggleShowAddBookPage  = () => {
-    this.setState({
-      showAddBookPage: !this.state.showAddBookPage
-    })
-    // console.log(this.state.showAddBookPage)
   }
 
   render() {
@@ -75,10 +51,10 @@ class BooksApp extends Component {
                 </div>
               </div>
               <div className="add-book">
-                <a onClick={this.toggleShowAddBookPage}>Add a book</a>
+                <Link to="/books/new">Add a Book</Link>
               </div>
               <div className="open-search">
-                <a onClick={this.toggleShowSearchPage}>Search books</a>
+                <Link to="/search">Search Books</Link>
               </div>
             </div>
           </div>
