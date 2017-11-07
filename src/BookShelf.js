@@ -1,11 +1,20 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import * as BooksAPI from './BooksAPI'
 
 class BookShelf extends Component {
   static propTypes = {
     books: PropTypes.array.isRequired,
     book_status: PropTypes.string.isRequired,
     page_title: PropTypes.string.isRequired
+  }
+
+  handleChange(book, event) {
+    // TODO make React re-render to reflect shelf change
+    BooksAPI.update(book, event.target.value)
+      // .then(console.log('books updated'))
+      .then(() => {BooksAPI.getAll()})
+      // .then(console.log(this.props.books))
   }
 
   render() {
@@ -19,7 +28,7 @@ class BookShelf extends Component {
           <ol className='books-grid'>
             {books.filter(book => book.shelf === book_status)
               .map(book =>
-                <li key={book.title}>
+                <li key={book.id}>
                   <div className="book">
                     <div className="book-top">
                       <img className="book-cover"
@@ -27,13 +36,12 @@ class BookShelf extends Component {
                            src={book.imageLinks.thumbnail}
                            alt={'{book.title}'} />
                       <div className="book-shelf-changer">
-                        {/*TODO update setState book.shelf*/}
-                        <select>
+                        <select value={book.shelf}
+                                onChange={(e) => this.handleChange(book, e)}>
                           <option value="none" disabled>Move to...</option>
                           <option value="currentlyReading">Currently Reading</option>
                           <option value="wantToRead">Want to Read</option>
                           <option value="read">Read</option>
-                          <option value="none">None</option>
                         </select>
                       </div>
                     </div>
