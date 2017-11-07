@@ -4,6 +4,7 @@ import './App.css'
 import BookShelf from './BookShelf'
 import SearchPage from './SearchPage'
 import AddBook from './AddBook'
+import { Route } from 'react-router-dom'
 
 class BooksApp extends Component {
   state = {
@@ -44,53 +45,46 @@ class BooksApp extends Component {
   }
 
   render() {
-    // TODO implement React Router to open AddBook component
-    if (this.state.showAddBookPage) {
-      return (
-        <div>
-          <AddBook/>
-        </div>
-      )
-    }
-
-    // TODO implement React Router to open SearchBook component
-    if (this.state.showSearchPage) {
-      return (
-        <div>
-          <SearchPage/>
-        </div>
-      )
-    }
-
     return (
-      <div className="app">
-        <div className="list-books">
-          <div className="list-books-title">
-            <h1>MyReads</h1>
-          </div>
-          <div className="list-books-content">
-            <div>
-              <BookShelf books={this.state.books}
-                         book_status='currentlyReading'
-                         page_title='Currently Reading' />
+      <div>
+        <Route path='/search' component={SearchPage}
+        />
 
-              <BookShelf books={this.state.books}
-                         book_status='wantToRead'
-                         page_title='Want to Read' />
+        <Route path='/books/new' component={AddBook}
+        />
 
-              <BookShelf books={this.state.books}
-                         book_status='read'
-                         page_title='Read' />
+        <Route exact path='/' render={() => (
+          <div className="app">
+            <div className="list-books">
+              <div className="list-books-title">
+                <h1>MyReads</h1>
+              </div>
+              <div className="list-books-content">
+                <div>
+                  <BookShelf books={this.state.books}
+                             book_status='currentlyReading'
+                             page_title='Currently Reading' />
+
+                  <BookShelf books={this.state.books}
+                             book_status='wantToRead'
+                             page_title='Want to Read' />
+
+                  <BookShelf books={this.state.books}
+                             book_status='read'
+                             page_title='Read' />
+                </div>
+              </div>
+              <div className="add-book">
+                <a onClick={this.toggleShowAddBookPage}>Add a book</a>
+              </div>
+              <div className="open-search">
+                <a onClick={this.toggleShowSearchPage}>Search books</a>
+              </div>
             </div>
           </div>
-          <div className="add-book">
-            <a onClick={this.toggleShowAddBookPage}>Add a book</a>
-          </div>
-          <div className="open-search">
-            <a onClick={this.toggleShowSearchPage}>Search books</a>
-          </div>
-        </div>
-    </div>
+          )}
+        />
+      </div>
     )
   }
 }
