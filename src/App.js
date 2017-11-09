@@ -3,7 +3,6 @@ import * as BooksAPI from './BooksAPI'
 import './App.css'
 import BookShelf from './components/BookShelf'
 import SearchPage from './components/SearchPage'
-import AddBook from './components/AddBook'
 import { Route, Link } from 'react-router-dom'
 
 class BooksApp extends Component {
@@ -15,7 +14,6 @@ class BooksApp extends Component {
     BooksAPI.getAll()
       .then((books) => {
         this.setState({ books })
-        // console.log(this.state.books)
     })
   }
 
@@ -30,10 +28,6 @@ class BooksApp extends Component {
         <Route path='/search' render={() =>
           <SearchPage books={this.state.books}/>
           }
-        />
-
-        <Route path='/books/new'
-               component={AddBook}
         />
 
         <Route exact path='/' render={() => (
@@ -58,9 +52,7 @@ class BooksApp extends Component {
                              page_title='Read' />
                 </div>
               </div>
-              <div className="add-book">
-                <Link to="/books/new">Add a Book</Link>
-              </div>
+
               <div className="open-search">
                 <Link to="/search">Search Books</Link>
               </div>

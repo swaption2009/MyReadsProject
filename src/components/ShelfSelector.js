@@ -7,6 +7,7 @@ class ShelfSelector extends Component {
       .then(console.log('books updated'))
       .then(() => {BooksAPI.getAll()})
       .then(() => this.getBooks)
+      .then(() => window.alert("book shelf has been updated"))
   }
 
   render() {

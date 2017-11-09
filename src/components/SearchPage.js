@@ -13,11 +13,6 @@ class SearchPage extends Component {
     this.setState({
       query: query.trim()
     })
-    // console.log(query)
-  }
-
-  clearQuery = () => {
-    this.setState({ query: '' })
   }
 
   render() {
@@ -29,7 +24,6 @@ class SearchPage extends Component {
     if (query) {
       const match = new RegExp(escapeRegExp(query), 'i')
       showingBooks = books.filter((book) => match.test(book.authors[0]) || match.test(book.title))
-      // console.log('showingBooks', showingBooks)
     } else {
       showingBooks = books
     }
