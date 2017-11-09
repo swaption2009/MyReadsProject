@@ -1,20 +1,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import * as BooksAPI from './BooksAPI'
+import ShelfSelector from './ShelfSelector'
 
 class BookShelf extends Component {
   static propTypes = {
     books: PropTypes.array.isRequired,
     book_status: PropTypes.string.isRequired,
     page_title: PropTypes.string.isRequired
-  }
-
-  handleChange(book, event) {
-    // TODO make React re-render to reflect shelf change
-    BooksAPI.update(book, event.target.value)
-      // .then(console.log('books updated'))
-      .then(() => {BooksAPI.getAll()})
-      // .then(console.log(this.props.books))
   }
 
   render() {
@@ -36,13 +28,7 @@ class BookShelf extends Component {
                            src={book.imageLinks.thumbnail}
                            alt={'{book.title}'} />
                       <div className="book-shelf-changer">
-                        <select value={book.shelf}
-                                onChange={(e) => this.handleChange(book, e)}>
-                          <option value="none" disabled>Move to...</option>
-                          <option value="currentlyReading">Currently Reading</option>
-                          <option value="wantToRead">Want to Read</option>
-                          <option value="read">Read</option>
-                        </select>
+                        <ShelfSelector book={book} />
                       </div>
                     </div>
                     <div className="book-title">{book.title}</div>

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import escapeRegExp from 'escape-string-regexp'
 import sortBy from 'sort-by'
+import ShelfSelector from './ShelfSelector'
 
 class SearchPage extends Component {
   state = {
@@ -69,13 +70,7 @@ class SearchPage extends Component {
                            src={book.imageLinks.thumbnail}
                            alt={'{book.title}'} />
                       <div className="book-shelf-changer">
-                        <select value={book.shelf}
-                                onChange={(e) => this.handleChange(book, e)}>
-                          <option value="none" disabled>Move to...</option>
-                          <option value="currentlyReading">Currently Reading</option>
-                          <option value="wantToRead">Want to Read</option>
-                          <option value="read">Read</option>
-                        </select>
+                        <ShelfSelector book={book} />
                       </div>
                     </div>
                     <div className="book-title">{book.title}</div>
