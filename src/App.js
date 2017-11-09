@@ -11,13 +11,17 @@ class BooksApp extends Component {
     books: [],
   }
 
-  // grab list of books and set as App state
-  componentDidMount() {
+  getBooks = () => {
     BooksAPI.getAll()
       .then((books) => {
         this.setState({ books })
         // console.log(this.state.books)
     })
+  }
+
+  // grab list of books and set as App state
+  componentDidMount() {
+    this.getBooks()
   }
 
   render() {
@@ -42,7 +46,8 @@ class BooksApp extends Component {
                 <div>
                   <BookShelf books={this.state.books}
                              book_status='currentlyReading'
-                             page_title='Currently Reading' />
+                             page_title='Currently Reading'
+                             getBooks={this.getBooks()}/>
 
                   <BookShelf books={this.state.books}
                              book_status='wantToRead'

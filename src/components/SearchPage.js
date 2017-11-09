@@ -36,9 +36,6 @@ class SearchPage extends Component {
 
     showingBooks.sort(sortBy('name'))
 
-    // console.log('inside SearchPage component', books);
-
-    // TODO implement book shelf change inside Search page
     return (
       <div className="search-books">
         <div className="search-books-bar">

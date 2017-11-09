@@ -11,7 +11,6 @@ class BookShelf extends Component {
 
   render() {
     const { books, book_status, page_title } = this.props
-    // {console.log('bookshelf', books)}
 
     return (
       <div className="bookshelf">
@@ -28,7 +27,8 @@ class BookShelf extends Component {
                            src={book.imageLinks.thumbnail}
                            alt={'{book.title}'} />
                       <div className="book-shelf-changer">
-                        <ShelfSelector book={book} />
+                        <ShelfSelector book={book}
+                                       getBooks={this.getBooks} />
                       </div>
                     </div>
                     <div className="book-title">{book.title}</div>

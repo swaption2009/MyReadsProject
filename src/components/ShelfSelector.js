@@ -3,11 +3,10 @@ import * as BooksAPI from '../BooksAPI'
 
 class ShelfSelector extends Component {
   handleChange(book, event) {
-    // TODO make React re-render to reflect shelf change
     BooksAPI.update(book, event.target.value)
       .then(console.log('books updated'))
       .then(() => {BooksAPI.getAll()})
-      .then(console.log(this.props.books))
+      .then(() => this.getBooks)
   }
 
   render() {
