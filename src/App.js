@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import * as BooksAPI from './BooksAPI'
 import './App.css'
-import BookShelf from './BookShelf'
-import SearchPage from './SearchPage'
-import AddBook from './AddBook'
+import BookShelf from './components/BookShelf'
+import SearchPage from './components/SearchPage'
+import AddBook from './components/AddBook'
 import { Route, Link } from 'react-router-dom'
 
 class BooksApp extends Component {

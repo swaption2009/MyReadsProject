@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import * as BooksAPI from './BooksAPI'
+import * as BooksAPI from '../BooksAPI'
 
 class ShelfSelector extends Component {
   handleChange(book, event) {
