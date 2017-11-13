@@ -3,11 +3,9 @@ import { Link } from 'react-router-dom'
 import escapeRegExp from 'escape-string-regexp'
 import sortBy from 'sort-by'
 import ShelfSelector from './ShelfSelector'
-import * as BooksAPI from '../BooksAPI'
 
 class SearchPage extends Component {
   state = {
-    new_books: [],
     query: ''
   }
 
@@ -15,31 +13,19 @@ class SearchPage extends Component {
     this.setState({
       query: query.trim()
     })
-    this.searchNewBook(query, 10)
   }
-
-  // TODO fix maxResults
-  searchNewBook = (query, maxResults = 10) => {
-    // console.log('book shelf updated')
-    BooksAPI.search(query, maxResults)
-      .then((books) => {
-        // console.log('result:', books)
-        this.setState({new_books: books})
-    })
-  }
-
 
   render() {
+    const { books } = this.props
     const { query } = this.state
 
     let showingBooks
 
-    // TODO fix error when query is null
     if (query) {
       const match = new RegExp(escapeRegExp(query), 'i')
-      showingBooks = this.state.new_books.filter((book) => match.test(book.title) || match.test(book.authors))
+      showingBooks = books.filter((book) => match.test(book.authors[0]) || match.test(book.title))
     } else {
-      showingBooks = this.state.new_books
+      showingBooks = books
     }
 
     showingBooks.sort(sortBy('name'))
@@ -64,28 +50,26 @@ class SearchPage extends Component {
 
           </div>
         </div>
-
         <div className="search-books-results">
           <ol className='books-grid'>
             {showingBooks.map(book =>
-                <li key={book.id}>
-                  <div className="book">
-                    <div className="book-top">
-                      <img className="book-cover"
-                           style={{width: 128, height: 193}}
-                           src={book.imageLinks.thumbnail}
-                           alt={'{book.title}'} />
-                      <div className="book-shelf-changer">
-                        <ShelfSelector book={book} />
-                      </div>
+              <li key={book.id}>
+                <div className="book">
+                  <div className="book-top">
+                    <img className="book-cover"
+                         style={{width: 128, height: 193}}
+                         src={book.imageLinks.thumbnail}
+                         alt={'{book.title}'} />
+                    <div className="book-shelf-changer">
+                      <ShelfSelector book={book} />
                     </div>
-                    <div className="book-title">{book.title}</div>
-                    <div className="book-authors">{book.authors}</div>
                   </div>
-                </li>
-              )}
+                  <div className="book-title">{book.title}</div>
+                  <div className="book-authors">{book.authors[0]}</div>
+                </div>
+              </li>
+            )}
           </ol>
-
         </div>
       </div>
     )
