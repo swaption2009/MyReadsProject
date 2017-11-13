@@ -28,7 +28,7 @@ class BookShelf extends Component {
                            alt={'{book.title}'} />
                       <div className="book-shelf-changer">
                         <ShelfSelector book={book}
-                                       getBooks={this.getBooks} />
+                                       updateShelf={this.props.updateShelf} />
                       </div>
                     </div>
                     <div className="book-title">{book.title}</div>

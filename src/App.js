@@ -17,6 +17,16 @@ class BooksApp extends Component {
     })
   }
 
+  updateShelf = (book, shelf) => {
+    // console.log('book shelf updated')
+    BooksAPI.update(book, shelf).then(() => {
+      book.shelf = shelf
+      this.setState(state => ({
+        books: state.books.filter(b=> b.id !== book.id).concat([book])
+      }))
+    })
+  }
+
   // grab list of books and set as App state
   componentDidMount() {
     this.getBooks()
@@ -41,15 +51,17 @@ class BooksApp extends Component {
                   <BookShelf books={this.state.books}
                              book_status='currentlyReading'
                              page_title='Currently Reading'
-                             getBooks={this.getBooks()}/>
+                             updateShelf={this.updateShelf} />
 
                   <BookShelf books={this.state.books}
                              book_status='wantToRead'
-                             page_title='Want to Read' />
+                             page_title='Want to Read'
+                             updateShelf={this.updateShelf} />
 
                   <BookShelf books={this.state.books}
                              book_status='read'
-                             page_title='Read' />
+                             page_title='Read'
+                             updateShelf={this.updateShelf} />
                 </div>
               </div>
 

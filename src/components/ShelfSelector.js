@@ -1,13 +1,8 @@
 import React, { Component } from 'react'
-import * as BooksAPI from '../BooksAPI'
 
 class ShelfSelector extends Component {
-  handleChange(book, event) {
-    BooksAPI.update(book, event.target.value)
-      .then(console.log('books updated'))
-      .then(() => {BooksAPI.getAll()})
-      .then(() => this.getBooks)
-      .then(() => window.alert("book shelf has been updated"))
+  handleChange = (book, shelf) => {
+    this.props.updateShelf(book, shelf)
   }
 
   render() {
@@ -16,7 +11,7 @@ class ShelfSelector extends Component {
     return (
       <div>
         <select value={book.shelf}
-                onChange={(e) => this.handleChange(book, e)}>
+                onChange={(e) => this.handleChange(book, e.target.value)}>
           <option value="none" disabled>Move to...</option>
           <option value="currentlyReading">Currently Reading</option>
           <option value="wantToRead">Want to Read</option>
