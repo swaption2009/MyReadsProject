@@ -35,7 +35,7 @@ class SearchPage extends Component {
       console.log("Query is null")
     }
   }
-  
+
   render() {
     const { query, new_books } = this.state
     let showingBooks
@@ -60,8 +60,8 @@ class SearchPage extends Component {
                             onChange={(event) => this.updateQuery(event.target.value)}
                             minLength={3}
                             debounceTimeout={300} />
-            <button onClick={this.clearQuery}>clear query</button>
           </div>
+          <button onClick={this.clearQuery}>clear query</button>
         </div>
 
         <div className="search-books-results">
@@ -75,11 +75,12 @@ class SearchPage extends Component {
                          src={book.imageLinks.thumbnail}
                          alt={'{book.title}'} />
                     <div className="book-shelf-changer">
-                      <ShelfSelector book={book} />
+                      <ShelfSelector book={book}
+                                     updateShelf={this.props.updateShelf} />
                     </div>
                   </div>
                   <div className="book-title">{book.title}</div>
-                  <div className="book-authors">{book.authors}</div>
+                  <div className="book-authors">{book.authors && book.authors.join(', ')}</div>
                 </div>
               </li>
             )}

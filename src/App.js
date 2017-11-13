@@ -27,7 +27,6 @@ class BooksApp extends Component {
     })
   }
 
-  // grab list of books and set as App state
   componentDidMount() {
     this.getBooks()
   }
@@ -36,7 +35,8 @@ class BooksApp extends Component {
     return (
       <div>
         <Route path='/search' render={() =>
-          <SearchPage books={this.state.books}/>
+          <SearchPage books={this.state.books}
+                      updateShelf={this.updateShelf}/>
           }
         />
 
