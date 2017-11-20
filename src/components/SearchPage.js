@@ -36,23 +36,41 @@ class SearchPage extends Component {
     }
   }
 
+  setNewBookShelf = (books, new_books) => {
+    new_books.filter(new_book => {
+      new_book.shelf = 'none'
+      books.forEach(book => {
+        if (book.title === new_book.title) {
+          new_book.shelf = book.shelf
+        }
+      })
+    })
+    console.log('book shelf updated')
+  }
+
+  refreshPage = () => {
+    window.location.reload()
+  }
+
   render() {
+    const { books } = this.props
     const { query, new_books } = this.state
     let showingBooks
 
     if (query) {
       const match = new RegExp(escapeRegExp(query), 'i')
       showingBooks = new_books.filter((book) => match.test(book.title) || match.test(book.authors))
+      this.setNewBookShelf(books, new_books)
+      showingBooks.sort(sortBy('name'))
     } else {
       showingBooks = new_books
     }
 
-    showingBooks.sort(sortBy('name'))
-
     return (
       <div className="search-books">
         <div className="search-books-bar">
-          <Link to='/' className="close-search">Close</Link>
+          <Link onClick={this.refreshPage} to='/'
+                className="close-search">Close</Link>
           <div className="search-books-input-wrapper">
             <DebounceInput type="text"
                             placeholder="Search by title or author"
